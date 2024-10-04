@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef } from "react";
 
 export default function Home() {
   const observer = useRef(null);
