@@ -7,9 +7,7 @@ import Image from "next/image";
 export default function Home() {
   const observer = useRef<IntersectionObserver | null>(null);
 
-  const { data, isFetchingNextPage, hasNextPage, fetchNextPage } = useMovies(
-    {}
-  );
+  const { data, isFetchingNextPage, isLoading, fetchNextPage } = useMovies({});
   const rewriteData = data?.pages.flatMap((item) => item.data) ?? [];
 
   const lastMovie = useCallback(
@@ -29,8 +27,6 @@ export default function Home() {
     },
     [isFetchingNextPage]
   );
-
-  console.log(hasNextPage);
 
   return (
     <main className="flex min-h-screen flex-col gap-4 py-6 px-10">
@@ -72,7 +68,7 @@ export default function Home() {
           </div>
         ))}
       </div>
-      {isFetchingNextPage && (
+      {isLoading && (
         <button className="bg-primary px-4 py-2 self-center rounded-full">
           <span className="text-sm text-black font-semibold">Loading...</span>
         </button>
